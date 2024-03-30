@@ -1,3 +1,64 @@
-site_name: ES GPS
+site_name: ES-GPS
+
+repo_name: Pzdrs/BP-app
+repo_url: https://github.com/Pzdrs/BP-app
+edit_uri: https://github.com/Pzdrs/BP-docs/tree/main/docs/
+
 theme:
   name: material
+  language: en
+  palette:
+      - media: "(prefers-color-scheme)"
+        toggle:
+            icon: material/brightness-auto
+            name: Switch to light mode
+      - media: "(prefers-color-scheme: light)"
+        scheme: default
+        primary: black
+        accent: black
+        toggle:
+            icon: material/brightness-7
+            name: Switch to dark mode
+      - media: "(prefers-color-scheme: dark)"
+        scheme: slate
+        primary: black
+        accent: blue
+        toggle:
+            icon: material/brightness-4
+            name: Switch to system preference
+  features:
+    - navigation.instant
+    - content.action.edit
+    - search.suggest
+    - search.share
+    - content.code.copy
+    - content.code.select
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+nav:
+  - "Home":
+    - index.md
+  - "Dashboard":
+    - dashboard/index.md
+    - "Prerequisites":
+      - dashboard/prerequisites/index.md
+    - "Installation":
+      - dashboard/installation/index.md
+      - dashboard/installation/docker.md
+      - dashboard/installation/source.md
+    - "Usage":
+      - dashboard/usage/index.md
+  - "Data source":
+    - data-source/index.md
+    - "Construction":
+      - data-source/construction/index.md
+    - "Flashing":
+      - data-source/flashing/index.md
+    - "Configuration":
+      - data-source/configuration/index.md
+    - "Troubleshooting":
+      - data-source/troubleshooting/index.md
+  - "More":
+    - more/development.md
