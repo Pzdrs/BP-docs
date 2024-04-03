@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Prerequisites for the dasboard deployment">
+        <meta name="description" content="Prerequisites for the dashboard deployment">
       
       
       
@@ -72,6 +72,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#database" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -1117,6 +1122,32 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#database" class="md-nav__link">
+    <span class="md-ellipsis">
+      Database
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mqtt-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      MQTT server
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1140,7 +1171,59 @@
 
   <h1>Prerequisites</h1>
 
-<p>database, broker</p>
+<p>Before even getting to the deployment process, a few prerequisites need to be established. The application mainly relies on a database for storing application and positional data and an MQTT broker from which the application will subscribe data.</p>
+<h2 id="database">Database</h2>
+<p>The ES-GPS dashboard used a document-based database MongoDB. Unlike the MQTT server, the connection details must be specified at deploy time, meaning it can't be changed at run time. The connection parameters are passed to the back-end by using <a href="https://en.wikipedia.org/wiki/Environment_variable">environment variables</a>. There are 3 required parameters that must be passed to the back-end in order for it to start:</p>
+<ul>
+<li><code>MONGO_HOST</code> (required) <br>
+    hostname or IP of the database</li>
+<li><code>MONGO_USERNAME</code> (required)</li>
+<li><code>MONGO_PASSWORD</code> (required) <br>
+    if no password is set, an empty string must be passed</li>
+</ul>
+<p>With these three parameters, given the server and the database can reach each other over the network, the backend is able to connect to the database. By default, the port <strong>27017</strong> is used to establish the connection, which is the default MongoDB port. If, for some reason, a different port needs to be used, the <code>MONGO_PORT</code> environment variable can be passed to the back-end with the specific port.</p>
+<p>There are a couple of different ways to deploy a MongoDB instance. One way is to use <a href="https://www.mongodb.com/docs/atlas/tutorial/deploy-free-tier-cluster/">Mongo Atlas</a> to deploy an instance in the cloud (a free tier is available). Another option is to deploy it yourself. It can be downloaded as a package using your favorite package manager, or Docker can be employed, which makes things much easier. Using plain Docker, a Mongo instance can be spun up with the following command.</p>
+<pre><code class="language-shell">$ docker run --name some-mongo -d mongo:tag
+</code></pre>
+<p>In case Docker Compose is used, the following service definition is added to the <code>docker-compose.yaml</code>.</p>
+<pre><code class="language-yaml">mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+</code></pre>
+<p>It also may be wise to use bind mounts or volumes in order to persist data across container restarts. More information on that topic can be found in the official <a href="https://docs.docker.com/storage/">documentation</a>.</p>
+<h2 id="mqtt-server">MQTT server</h2>
+<p>The MQTT protocol operates on the principle of a broker and end devices. At its core lies a central server, often termed as a "broker" in messaging parlance, which orchestrates data communication among devices. This setup revolves around a publish-subscribe model, wherein publishers—typically data sources like sensors or location tracking devices—transmit data (messages) to the central broker, which manages active subscribers.</p>
+<p>Each message is published on a so-called topic, an organizational unit within the MQTT architecture. In case of this project, the data sources publish data on the <strong>esgps/gnss</strong> topic that is then also subscribed to by the application. When a message arrives at the broker, it is relayed to all active subscribers listening to that specific topic. </p>
+<p>There are many open-source brokers, most notably the following:</p>
+<ul>
+<li>Eclipse Mosquitto</li>
+<li>RabbitMQ</li>
+<li>HiveMQ</li>
+<li>Redis (an in-memory database that can be leveraged to act as a message queue)</li>
+</ul>
+<p>During development, both Mosquitto and RabbitMQ were used and are, therefore, the officially supported message brokers of this project.</p>
+<p>In case no preexisting message broker is available, the deployment of one is equally as simple as MongoDB in the previous section. Here is an example of how to deploy a RabbitMQ instance using Docker Compose.</p>
+<pre><code class="language-yaml">version: '3.7'
+
+services:
+  rabbitmq:
+    image: rabbitmq:tag
+    hostname: my-rabbit
+    container_name: rabbitmq
+    restart: unless-stopped
+    environment:
+      - RABBITMQ_DEFAULT_USER=username
+      - RABBITMQ_DEFAULT_PASS=password
+    ports:
+      - &quot;5672:5672&quot;  # RabbitMQ default port
+      - &quot;1883:1883&quot; # MQTT
+    command: | 
+        &quot;/bin/bash -c \&quot;rabbitmq-plugins enable --offline rabbitmq_mqtt rabbitmq_web_mqtt rabbitmq_amqp1_0; rabbitmq-server\&quot;&quot;
+</code></pre>
+<p>The details of configuring the MQTT broker at run-time are covered in the <a href="../usage/">Usage</a> chapter.</p>
 
 
 
