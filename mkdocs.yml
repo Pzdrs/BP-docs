@@ -4,6 +4,9 @@ repo_name: Pzdrs/BP-app
 repo_url: https://github.com/Pzdrs/BP-app
 edit_uri: https://github.com/Pzdrs/BP-docs/tree/main/docs/
 
+markdown_extensions:
+  - admonition
+
 theme:
   name: material
   language: en
