@@ -73,6 +73,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#back-end" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -1117,6 +1122,32 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#back-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      Back-end
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#front-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      Front-end
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1141,6 +1172,12 @@
   <h1>Installation</h1>
 
 <p>You have a two main options for deploying the ESGPS dashboard, depending on your needs. The recommended and most well documented option is <a href="docker/">Docker</a>. With the help of Docker Compose, you can have the dashboard up and running in a matter of minutes. We offer docker images for a majority of platforms. You can also install and run the dashboard from <a href="source/">source</a> if Docker is not your thing.</p>
+<p>The ES-GPS application consists of two primary components: the back-end, responsible for handling the heavy lifting, and the front-end, which serves as the user interface. A third crucial component is a proxy server tasked with routing requests to the appropriate back-end or front-end based on the domain name. Although not directly integrated into the ES-GPS application, this <strong>proxy server</strong> is indispensable for the application's proper functionality. Nginx stands out as the recommended choice for this role, and accordingly, we provide the necessary configuration files for its setup.</p>
+<h2 id="back-end">Back-end</h2>
+<p>The back-end is a Java application that uses the Spring Boot framework. It is responsible for handling all the business logic, as well as communicating with the database and the MQTT broker. It also serves as the front-end API.</p>
+<p>Java applications are packaged into JAR files, which can be run on any machine, thanks to the JVM (Java Virtual Machine), which makes Java applications platform-independent.</p>
+<h2 id="front-end">Front-end</h2>
+<p>The front-end is a separate web application that uses the back-end's API to read and write data while providing a user-friendly interface. The application is built using the Vue.js framework, which is a popular JavaScript framework for building user interfaces and single-page applications.</p>
 
 
 
@@ -1168,6 +1205,46 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../prerequisites/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Prerequisites">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Prerequisites
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="docker/" class="md-footer__link md-footer__link--next" aria-label="Next: Docker Installation">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Docker Installation
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -1190,7 +1267,7 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "content.action.edit", "search.suggest", "search.share", "content.code.copy", "content.code.select", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.instant", "content.action.edit", "search.suggest", "search.share", "content.code.copy", "content.code.select", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.bd41221c.min.js"></script>

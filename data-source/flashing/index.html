@@ -73,6 +73,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#cloning-the-repository" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -1120,6 +1125,32 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cloning-the-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cloning the repository
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#downloading-the-binary-directly" class="md-nav__link">
+    <span class="md-ellipsis">
+      Downloading the binary directly
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1143,7 +1174,33 @@
 
   <h1>Flashing</h1>
 
-<p>flashing</p>
+<p>There are really two options when it comes to flashing the microcontroller firmware:</p>
+<ol>
+<li>Head to <a href="https://github.com/Pzdrs/BP-firmware/releases">releases</a> in the GitHub repository, download the binary and flash it</li>
+<li>Clone the repository, set-up the environment and use PlatformIO to build the binaries and flash them that way</li>
+</ol>
+<p>This page covers both these options.</p>
+<h2 id="cloning-the-repository">Cloning the repository</h2>
+<pre><code class="language-bash">git clone https://github.com/Pzdrs/BP-firmware.git
+cd BP-firmware
+</code></pre>
+<p>Using your favorite IDE, install the PlatformIO extension and open the project. In the Project view, right click the <code>platformio.ini</code> file and select "Build". This will compile the firmware and create a binary file in the <code>.pio/build/nodemcu-32s</code> directory.</p>
+<p><img alt="alt text" src="../../assets/pio-build.png" /></p>
+<p>Next, we need to flash the binary to the microcontroller using esptool. You can follow the instructions in the next section to do this.</p>
+<h2 id="downloading-the-binary-directly">Downloading the binary directly</h2>
+<p>After every major change to the firmware the binary is compiled and released on GitHub. All releases can be found at <a href="https://github.com/Pzdrs/BP-firmware/releases">https://github.com/Pzdrs/BP-firmware/releases</a>.</p>
+<p>We are going to download the binary itself and then use <a href="https://github.com/espressif/esptool"><strong>esptool</strong></a> to flash it.</p>
+<p>So first off, download the binary file from the latest release. For example, to download the binary from the v1.0.0 release, run the following command:</p>
+<pre><code class="language-bash">wget https://github.com/Pzdrs/BP-firmware/releases/download/v1.0.0/firmware.bin
+</code></pre>
+<p>Next, we need to flash the binary to the microcontroller. We can use esptool's <code>write_flash</code> command to do this. The command is as follows:</p>
+<pre><code class="language-bash">python esptool.py -p (PORT) --chip esp32 write_flash firmware.bin
+</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">Common flashing issue</p>
+<p>For some reason, the ESP32 sometimes refuses to flash because of the incorrect boot mode (in particular, the message "Wrong boot mode detected (0x13)! The chip needs to be in download mode."). This can usually be resolved by just running the command again or by manually putting the ESP32 into download mode.</p>
+<p>Press and hold the BOOT button on the ESP32, then press and release the EN button. After that, release the BOOT button. The ESP32 should now be in download mode and ready to be flashed.</p>
+</div>
 
 
 
@@ -1171,6 +1228,46 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../construction/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Construction">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Construction
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../configuration/" class="md-footer__link md-footer__link--next" aria-label="Next: Configuration">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Configuration
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -1193,7 +1290,7 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "content.action.edit", "search.suggest", "search.share", "content.code.copy", "content.code.select", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.instant", "content.action.edit", "search.suggest", "search.share", "content.code.copy", "content.code.select", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.bd41221c.min.js"></script>

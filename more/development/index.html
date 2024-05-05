@@ -71,6 +71,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#development-overview" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -1072,6 +1077,17 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Development
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1081,6 +1097,80 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#development-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Development Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      Firmware
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dashboard
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dashboard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backend
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      Frontend
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1112,6 +1202,71 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#development-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Development Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      Firmware
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dashboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dashboard
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dashboard">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backend
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      Frontend
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1135,7 +1290,34 @@
 
   <h1>Development</h1>
 
-<p>development</p>
+<h2 id="development-overview">Development Overview</h2>
+<p>Depending on which part of the project you want to contribute to, you will need to set up a different environments. The following sections will guide you through setting up the development environment for each part of the project.</p>
+<p>The project is split into two main parts - the firmware and the web interface, each one with its own repository.</p>
+<h3 id="firmware">Firmware</h3>
+<p>The firmware is a C++ application that runs on the ESP32 microcontroller. The firmware is responsible for collecting data from the sensors and sending it to the backend. The firmware is built using PlatformIO, so you will need to have it installed on your machine.</p>
+<p>The simplest way to get started is with CLion. Click on <code>Get from VCS</code> and paste the <a href="https://github.com/Pzdrs/BP-firmware.git">link</a> to the repository. CLion will automatically create a CMake project for you.</p>
+<p><img alt="Create project" src="../../assets/clion1.png" />
+<img alt="Paste link" src="../../assets/clion2.png" />
+<img alt="Create CMake" src="../../assets/clion3.png" /></p>
+<h3 id="dashboard">Dashboard</h3>
+<p>The dashboard consists of the backend and the frontend. Both codebases share the same repository, so regardless of which part you want to contribute to, you will need to clone the repository:</p>
+<pre><code class="language-bash">git clone https://github.com/Pzdrs/BP-app.git
+</code></pre>
+<p>Any contributions should be made to the <code>develop</code> branch. The <code>main</code> merging process is done by the maintainers.</p>
+<h4 id="backend">Backend</h4>
+<p>The backend is a Spring Boot application that uses Gradle as a build and dependency management tool. To run the backend, you will need to have Java 21 installed on your machine.</p>
+<p>To run the backend, navigate to the <code>backend</code> directory and run the following command:</p>
+<pre><code class="language-bash">./gradlew bootRun
+</code></pre>
+<p>If you take a look in <code>main/resources/application.yaml</code>, you will see some environment variables are needed for the application to start. You can either set them in your environment or create a <code>.env</code> file in the <code>backend</code> directory.</p>
+<h4 id="frontend">Frontend</h4>
+<p>The frontend of the application is taken care of by VueJS 3. To run the frontend, you will need to have NodeJS installed on your machine.</p>
+<p>To run the frontend, navigate to the <code>frontend</code> directory and run the following command:</p>
+<pre><code class="language-bash">npm install
+</code></pre>
+<p>After all the dependencies are installed, you can run the frontend with:</p>
+<pre><code class="language-bash">npm run dev
+</code></pre>
 
 
 
@@ -1163,6 +1345,30 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../data-source/troubleshooting/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Troubleshooting">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Troubleshooting
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -1185,7 +1391,7 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "content.action.edit", "search.suggest", "search.share", "content.code.copy", "content.code.select", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.instant", "content.action.edit", "search.suggest", "search.share", "content.code.copy", "content.code.select", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.bd41221c.min.js"></script>

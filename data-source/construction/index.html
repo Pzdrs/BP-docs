@@ -73,6 +73,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#components" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -1120,6 +1125,65 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Components
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gnss-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      GNSS module
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mpu6050" class="md-nav__link">
+    <span class="md-ellipsis">
+      MPU6050
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#leds" class="md-nav__link">
+    <span class="md-ellipsis">
+      LEDs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#miscellaneous" class="md-nav__link">
+    <span class="md-ellipsis">
+      Miscellaneous
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1143,7 +1207,55 @@
 
   <h1>Construction</h1>
 
-<p><img alt="Dashboard demo" src="../../assets/data-source-wiring.png" /></p>
+<p>The hardware package is assembled on a no-solder breadboard. The wiring diagram below shows how everything is connected together.</p>
+<p><img alt="Diagram" src="../../assets/data-source-wiring.png" /></p>
+<h2 id="components">Components</h2>
+<p>The two main components are the <strong>u-blox NEO-M8</strong> GNSS module and the <strong>MPU6050</strong> accelerometer + gyroscope module.</p>
+<h3 id="gnss-module">GNSS module</h3>
+<p>The GNSS module can be subsituted for pretty much any other available module, that communicates over <strong>Serial</strong>. The firmware is expecting valid NMEA messages on the Serial line with the following settings:</p>
+<ul>
+<li><strong>9600</strong> baud</li>
+<li><strong>8</strong> data bits</li>
+<li>no parity bits</li>
+<li><strong>1</strong> stop bit</li>
+</ul>
+<p>The module is communicating with the microcontroller using pins <strong>16</strong> and <strong>17</strong> (Rx &amp; Tx respectively) according to the pinout schema in the image below.</p>
+<p><img alt="alt text" src="../../assets/pinouts/gnss-pins.jpg" /></p>
+<h3 id="mpu6050">MPU6050</h3>
+<p>When it comes to the MPU6050, it communicated a little differently than the GNSS module. This module utilizes the <a href="https://en.wikipedia.org/wiki/I%C2%B2C">I2C bus</a>. In the image bellow is the modules pin schema. Besides VCC and GND, we need to connect it to the microcontroller with the Serial Clock and Data (<strong>SCL</strong> and <strong>SDA</strong>).</p>
+<p><img alt="alt text" src="../../assets/pinouts/MPU6050-Pinout.png" /></p>
+<p>The ESP32 pinout below shows which pins to connect the module to (just follow the pin labels, i.e. SDA to SDA and SCL to SCL).</p>
+<p><img alt="alt text" src="../../assets/pinouts/mpu6050-pins.jpg" /></p>
+<h3 id="leds">LEDs</h3>
+<p>Besides the two mentioned modules, the solution is equipped with a button and a handful LEDs. See the table below for their purpose as well as their respective GPIO pins.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">LED</th>
+<th style="text-align: center;">GPIO</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Blue</td>
+<td style="text-align: center;">5</td>
+<td>Indicates the state of the WiFi hotspot, i.e. LED is ON when the hotspot is enabled</td>
+</tr>
+<tr>
+<td style="text-align: center;">Green</td>
+<td style="text-align: center;">4</td>
+<td>Positional fix (&gt;= 4 satellites means a locked fix and the LED lights up)</td>
+</tr>
+<tr>
+<td style="text-align: center;">Red</td>
+<td style="text-align: center;">18</td>
+<td>MQTT message publication (it blinks once for every published message), tells the overall status of MQTT alongside the publish frequency</td>
+</tr>
+</tbody>
+</table>
+<h3 id="miscellaneous">Miscellaneous</h3>
+<p>Lastly, a button connected to GPIO pin <strong>15</strong> is used for runtime controls of the WiFi hotspot.</p>
 
 
 
@@ -1171,6 +1283,46 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Data Source">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Data Source
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../flashing/" class="md-footer__link md-footer__link--next" aria-label="Next: Flashing">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Flashing
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -1193,7 +1345,7 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "content.action.edit", "search.suggest", "search.share", "content.code.copy", "content.code.select", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.instant", "content.action.edit", "search.suggest", "search.share", "content.code.copy", "content.code.select", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.indexes"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.bd41221c.min.js"></script>
