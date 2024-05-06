@@ -73,6 +73,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#device-adoption" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -1117,6 +1122,98 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#device-adoption" class="md-nav__link">
+    <span class="md-ellipsis">
+      Device adoption
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      User management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#registering-a-new-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      Registering a new user
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-source-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data source permissions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#access-tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      Access tokens
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Access tokens">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#registering-a-new-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      Registering a new token
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#managing-tokens" class="md-nav__link">
+    <span class="md-ellipsis">
+      Managing tokens
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#working-with-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Working with data
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1140,7 +1237,53 @@
 
   <h1>Usage</h1>
 
-<p>usage</p>
+<h2 id="device-adoption">Device adoption</h2>
+<p>Adding new data sources isn't a conventional process of mannually creating a new data source. Instead, the process relies on the adoption model. Unifi network device ecosystem also used this model.</p>
+<p>When a new data source is powered on and starts publishing data to the MQTT broker, the server picks up on it and creates a new data source. This data source is marked as unadopted and until it is adopted, the server will not start collecting positional data.</p>
+<p>A new device ready for adoption appears in the data source management page as shown in the picture below.</p>
+<p><img src="../../assets/adoption1.png" style="border: 1px solid black"/></p>
+<p>The adoption process allows the user to set the name and color of the device.</p>
+<p><img src="../../assets/adoption2.png" style="border: 1px solid black"/></p>
+<p>Once the device is adopted, the server starts collecting data from it and the device now appears as an adopted device.</p>
+<p><img src="../../assets/adoption3.png" style="border: 1px solid black"/></p>
+<h2 id="user-management">User management</h2>
+<h3 id="registering-a-new-user">Registering a new user</h3>
+<p><img src="../../assets/useradd1.png" style="border: 1px solid black"/>
+<img src="../../assets/useradd2.png" style="border: 1px solid black"/>
+<img src="../../assets/useradd3.png" style="border: 1px solid black"/></p>
+<h3 id="data-source-permissions">Data source permissions</h3>
+<p>Each normal user by default does not have access to any data source (administrator users have access to all data sources). A user can be assigned zero or more data sources. Data sources can also be grouped into groups and a user can be assigned a group.</p>
+<p>Hovering over a user shows the edit and delete buttons. Clicking on the edit button opens a modal that allows the user to be assigned data sources.</p>
+<p><img src="../../assets/userperm1.png" style="border: 1px solid black"/></p>
+<p>The edit modal for a user allows all of this as shown in the picture below.</p>
+<p><img src="../../assets/userperm2.png" style="border: 1px solid black"/></p>
+<h2 id="access-tokens">Access tokens</h2>
+<h3 id="registering-a-new-token">Registering a new token</h3>
+<p><img src="../../assets/tokens1.png" style="border: 1px solid black"/></p>
+<p>When creating a new token, a description can be set and also the expiry. If the expiry is not set, the token does not expire.</p>
+<p><img src="../../assets/tokens2.png" style="border: 1px solid black"/>
+<img src="../../assets/tokens3.png" style="border: 1px solid black"/></p>
+<h3 id="managing-tokens">Managing tokens</h3>
+<p>Tokens can be revoked by clicking on the revoke button. They can also be altered, the description and expiry can be changed. Also the state of the token can be toggled. The following series of images illustrates disabling the token.</p>
+<p><img src="../../assets/tokens4.png" style="border: 1px solid black"/>
+<img src="../../assets/tokens5.png" style="border: 1px solid black"/>
+<img src="../../assets/tokens6.png" style="border: 1px solid black"/></p>
+<h2 id="working-with-data">Working with data</h2>
+<p>The map page allows users to query collected data and display it on a map. The is a bar chart giving a quick glance of the data distribution throught the year. The picture below shows the map page.</p>
+<p><img src="../../assets/map1.png" style="border: 1px solid black"/></p>
+<p>The general process of displaying the data is as follows:</p>
+<ol>
+<li>Select one or more data sources.</li>
+<li>Select the time range.</li>
+<li>Submit</li>
+</ol>
+<p><img src="../../assets/map2.png" style="border: 1px solid black"/></p>
+<p>After submiting the form, the application starts downloading data indicated by the loading spinner.</p>
+<p><img src="../../assets/map3.png" style="border: 1px solid black"/></p>
+<p>After everything is downloaded, it is rendered on the map and the user is brought to the map itself.</p>
+<p><img src="../../assets/map4.png" style="border: 1px solid black"/></p>
+<p>The user can zoom in and inspect individual data points</p>
+<p><img src="../../assets/map5.png" style="border: 1px solid black"/></p>
 
 
 
